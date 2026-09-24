@@ -61,6 +61,7 @@
   @media (max-width: 640px) { #model { font-size: 17px; } #model h1 { font-size: 25px; } #model code { font-size: 12px; } }
   @media (max-width: 640px) { .title { font-size: 17px; } #about { font-size: 17px; } #about h1 { font-size: 25px; } }
 </style>
+<script data-goatcounter="https://aemberley.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 <main id="work">
@@ -430,6 +431,12 @@ const WTS={"We":[[0.18931,-0.07143,0.33879,0.18112,-0.41213,0.2006,0.71434,0.478
     if (about) { if (running) runBtn.click(); window.scrollTo(0, 0); } else { resize(); frame(performance.now()); }
   }
   addEventListener("hashchange", show);
+  // count visits to About this work and The model as their own pages in GoatCounter
+  addEventListener("hashchange", () => {
+    const names = { "#about": "About this work", "#model": "The model" };
+    if (window.goatcounter && window.goatcounter.count && names[location.hash])
+      window.goatcounter.count({ path: location.pathname + location.hash, title: "Cordyceps Septet: " + names[location.hash] });
+  });
 
   // ---------- darkness: chosen by the viewer, and undone only by a click or tap on the field, or Escape ----------
   const darkBtn = document.getElementById("darken"); let tap = null;
